@@ -15,29 +15,20 @@ import org.apache.http.HttpHeaders;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.rest.common.util.HttpConstants;
 import org.rest.integration.ExamplePaths;
 import org.rest.integration.FooRESTTemplate;
 import org.rest.integration.security.SecurityComponent;
+import org.rest.integration.test.AbstractRESTIntegrationTest;
 import org.rest.model.Foo;
-import org.rest.spring.application.ApplicationConfig;
-import org.rest.spring.persistence.jpa.PersistenceJPAConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 
-@RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration( classes = { ApplicationConfig.class, PersistenceJPAConfig.class },loader = AnnotationConfigContextLoader.class )
-@ActiveProfiles( "jpa" )
-public class FooRESTIntegrationTest{
+public class FooRESTIntegrationTest extends AbstractRESTIntegrationTest{
 	@Autowired
 	ExamplePaths paths;
 	

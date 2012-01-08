@@ -3,7 +3,7 @@ package org.rest.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.rest.service.foo.impl.FooServiceUnitTest;
+import org.rest.persistence.service.foo.impl.FooServiceUnitTest;
 
 @RunWith( Suite.class )
 @SuiteClasses( { FooServiceUnitTest.class, SpringTest.class } )

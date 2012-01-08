@@ -7,29 +7,29 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Profile( "jpa" )
 @Configuration
 @EnableTransactionManagement
+@ImportResource( "classpath*:*springDataConfig.xml" )
 public class PersistenceJPAConfig{
 	
-	@Value( "${driverClassName}" )
+	@Value( "${jdbc.driverClassName}" )
 	private String driverClassName;
 	
-	@Value( "${url}" )
+	@Value( "${jdbc.url}" )
 	private String url;
 	
-	@Value( "${persistence.dialect}" )
-	String persistenceDialect;
+	@Value( "${hibernate.dialect}" )
+	String hibernateDialect;
 	
 	@Value( "${hibernate.show_sql}" )
 	boolean hibernateShowSql;
@@ -47,7 +47,8 @@ public class PersistenceJPAConfig{
 		
 		final JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter(){
 			{
-				this.setDatabasePlatform( PersistenceJPAConfig.this.persistenceDialect );
+				this.setDatabase( Database.MYSQL );
+				this.setDatabasePlatform( PersistenceJPAConfig.this.hibernateDialect );
 				this.setShowSql( PersistenceJPAConfig.this.hibernateShowSql );
 				this.setGenerateDdl( true );
 			}
@@ -70,7 +71,7 @@ public class PersistenceJPAConfig{
 	}
 	
 	@Bean
-	public PlatformTransactionManager transactionManager(){
+	public JpaTransactionManager transactionManager(){
 		final JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory( this.entityManagerFactoryBean().getObject() );
 		

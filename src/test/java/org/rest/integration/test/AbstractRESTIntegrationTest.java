@@ -1,21 +1,14 @@
-package org.rest.test;
+package org.rest.integration.test;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.rest.spring.application.ApplicationTestConfig;
 import org.rest.spring.persistence.jpa.PersistenceJPAConfig;
-import org.rest.spring.security.SecurityConfig;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 @RunWith( SpringJUnit4ClassRunner.class )
-@ContextConfiguration( classes = { PersistenceJPAConfig.class, SecurityConfig.class, ApplicationTestConfig.class },loader = AnnotationConfigContextLoader.class )
-public final class SpringTest{
-	
-	@Test
-	public final void whenSpringContextIsInstantiated_thenNoExceptions(){
-		//
-	}
-	
+@ContextConfiguration( classes = { ApplicationTestConfig.class, PersistenceJPAConfig.class },loader = AnnotationConfigContextLoader.class )
+public abstract class AbstractRESTIntegrationTest{
+	//
 }

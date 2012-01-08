@@ -9,9 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * @author eugenp
- */
 @Entity
 @XmlRootElement
 public class Foo implements Serializable{
